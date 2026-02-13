@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cute But Scary Surprise</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(to top, #ffd6ec, #ffe9f5, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+    transition: 0.5s;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Rainbow title */
+h1 {
+    background: linear-gradient(45deg, pink, purple, orange);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Flower spin */
+.flower {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    animation: spin 8s linear infinite;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.petal {
+    width: 70px;
+    height: 70px;
+    background: hotpink;
+    border-radius: 50%;
+    position: absolute;
+}
+.petal:nth-child(1) { top: 0; left: 40px; }
+.petal:nth-child(2) { top: 40px; left: 0; }
+.petal:nth-child(3) { top: 40px; right: 0; }
+.petal:nth-child(4) { bottom: 0; left: 40px; }
+
+.center {
+    width: 60px;
+    height: 60px;
+    background: yellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 45px;
+    left: 45px;
+}
+
+/* Girl */
+.girl { margin-top: 20px; }
+
+.head {
+    width: 80px;
+    height: 80px;
+    background: #ffe0bd;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+}
+
+.hair {
+    width: 100px;
+    height: 90px;
+    background: #5a3825;
+    border-radius: 50% 50% 40% 40%;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    z-index: -1;
+}
+
+.eye {
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 30px;
+    animation: blink 4s infinite;
+}
+@keyframes blink {
+    0%, 90%, 100% { height: 10px; }
+    95% { height: 1px; }
+}
+.eye.left { left: 20px; }
+.eye.right { right: 20px; }
+
+.smile {
+    width: 30px;
+    height: 15px;
+    border-bottom: 3px solid black;
+    border-radius: 0 0 50px 50px;
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+}
+
+.body {
+    width: 80px;
+    height: 100px;
+    background: #ff69b4;
+    border-radius: 20px;
+    margin: auto;
+}
+
+/* Fun button */
+button {
+    margin-top: 20px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* SCARY MODE */
+#scaryScreen {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+}
+
+.scaryFace {
+    font-size:150px;
+    animation: zoom 0.5s infinite alternate;
+}
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+.blood {
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100px;
+    background:linear-gradient(red, darkred);
+}
+
+@keyframes shake {
+    0% { transform: translate(5px,5px); }
+    25% { transform: translate(-5px,-5px); }
+    50% { transform: translate(5px,-5px); }
+    75% { transform: translate(-5px,5px); }
+    100% { transform: translate(5px,5px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<div class="heart" style="left:10%;">💖</div>
+<div class="heart" style="left:30%; animation-delay:2s;">💕</div>
+<div class="heart" style="left:60%; animation-delay:4s;">💗</div>
+<div class="heart" style="left:80%; animation-delay:1s;">💘</div>
+
+<div style="text-align:center;">
+<h1>🌸 Cute Flower Girl 🌸</h1>
+
+<div class="flower">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
+
+<div class="girl">
+    <div class="head">
+        <div class="hair"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="smile"></div>
+    </div>
+    <div class="body"></div>
+</div>
+
+<button onclick="activateScary()">Click Me For Surprise 🎀</button>
+</div>
+
+<!-- SCARY SCREEN -->
+<div id="scaryScreen">
+    <div class="blood"></div>
+    <div class="scaryFace">👹</div>
+    <h1 style="color:red;">YOU CLICKED IT😈</h1>
+</div>
+
+<!-- Sound -->
+<audio id="screamSound">
+    <source src="https://www.myinstants.com/media/sounds/movie_1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function activateScary(){
+    document.getElementById("scaryScreen").style.display="flex";
+    document.body.style.animation="shake 0.2s infinite";
+    document.body.style.background="black";
+
+    let sound = document.getElementById("screamSound");
+    sound.play();
+
+    setTimeout(()=>{
+        document.getElementById("scaryScreen").style.display="none";
+        document.body.style.animation="none";
+        document.body.style.background="linear-gradient(to top, #ffd6ec, #ffe9f5, #fff)";
+    },4000);
+}
+</script>
+
+</body>
+</html>
